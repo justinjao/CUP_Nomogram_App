@@ -133,7 +133,7 @@ server <- function(input, output) {
     gauge(min = 0, max = 100, value = round(ifelse(twoYrSurv() < 1,
                                                    1,
                                                    twoYrSurv())), 
-          symbol = "%", label = "Two Year Survival")
+          symbol = "%", label = "Two Year Survival", gaugeSectors(warning = c(0,100)))
   })
 }
 
