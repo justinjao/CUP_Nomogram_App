@@ -16,12 +16,12 @@ library(survival)
 model <- readRDS("mymodel.rds")
 
 #defining the CSS settings for the Gauge widget
-css <- HTML("
-.html-widget.gauge svg {
+css <- HTML(
+".html-widget.gauge svg {
   height: 200px;
   width: 300px;
-  
-}")
+  }",
+".main-sidebar { font-size: 20px; }")
 # Defining UI (Front-End) -------------------------------------------------
 
 # Define UI for application. This uses the dashboard layout with a black skin
