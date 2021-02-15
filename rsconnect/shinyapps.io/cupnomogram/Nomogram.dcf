@@ -5,9 +5,9 @@ account: cupnomogram
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 2942173
-bundleId: 4224597
+bundleId: 4227359
 url: https://cupnomogram.shinyapps.io/Nomogram/
-when: 1613383221.97565
+when: 1613431300.83256
 asMultiple: FALSE
 asStatic: FALSE
 ignoredFiles: .httr-oauth|README.md
