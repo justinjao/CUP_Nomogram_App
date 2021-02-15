@@ -42,10 +42,7 @@ ui <-dashboardPage(skin = "blue",
                                                              "Adenocarcinoma" = "adeno")),
                                     radioButtons(inputId = "numsites", label = "Number of Metastatic Sites",
                                                  choices = c("<3","≥3")),
-                                    radioButtons(inputId = "nlr", label = "Neutrophil-Lymphocite Ratio (NLR)",
-                                                 choices = c("<5", "≥5"))
-                                    
-                   ),
+                                     numericInput(inputId = "nlr", label = "(NLR) Neutrophil-Lymphocite Ratio  (max is ≥50)", min = 0.0, max = 50.0, value = 1.0, step = 0.1, width = 400)),
                    
                    # set the UI for the main panel 
                    dashboardBody(
@@ -114,10 +111,8 @@ server <- function(input, output) {
         numsites <- switch(input$numsites,
                            "<3" = 0,
                            "≥3" = 31),
-        nlr <- switch(input$nlr,
-                      "<5" = 0,
-                      "≥5" = 64)
-    )
+        # set max value to 50 for the model
+        nlr <- min(input$nlr, 50.0))
   })
   
   # render the value box based on totalSum
@@ -125,7 +120,7 @@ server <- function(input, output) {
     valueBox(totalSum(), subtitle = "Patient Score", icon = icon("notes-medical"))
   })
   
-  #calculates the different survival rates and converts to a percentage
+  # calculates the different survival rates and converts to a percentage
   oneYrSurv <- reactive(exp(-exp(0.0123 * totalSum() - 1.95)) * 100)
   twoYrSurv <- reactive(exp(-exp(0.0123 * totalSum() - 1.09)) * 100)
   
