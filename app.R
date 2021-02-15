@@ -20,7 +20,11 @@ css <- HTML(
 ".html-widget.gauge svg {
   height: 200px;
   width: 300px;
+  font-weight: bold;
   }",
+".html-widget.gauge text {
+    font-weight: bold !important;
+}",
 ".main-sidebar { font-size: 20px; }",
 ".irs-grid-text { font-size: 20px; }")
 # Defining UI (Front-End) -------------------------------------------------
@@ -36,14 +40,14 @@ ui <-dashboardPage(skin = "blue",
                                     radioButtons(inputId = "sex", label = "Sex",
                                                  choices = c("Female" = "Female",
                                                              "Male" = "Male")),
-                                    sliderTextInput(inputId = "ecog", label = "ECOG Status", hide_min_max = TRUE,
+                                    sliderTextInput(inputId = "ecog", label = "ECOG Performance Status", hide_min_max = TRUE,
                                                     choices = c("0", "1", "2", "> 2"), selected = "0", grid = TRUE, width = 400),
                                     radioButtons(inputId = "histology", label = "Histology",
                                                  choices = c("Non-Adenocarcinoma" = "Non-Adenoca",
                                                              "Adenocarcinoma" = "Adenoca")),
                                     radioButtons(inputId = "numsites", label = "Number of Metastatic Sites",
                                               choiceNames = c("<3", "≥3"),  choiceValues = c("< 3",">= 3")), ##going to have to fix this
-                                     numericInput(inputId = "nlr", label = "(NLR) Neutrophil-Lymphocite Ratio  (max is ≥50)", min = 0.0, max = 50.0, value = 1.0, step = 0.1, width = 400)),
+                                     numericInput(inputId = "nlr", label = "(NLR) Neutrophil-Lymphocyte Ratio  (max is 50)", min = 0.0, max = 50.0, value = 1.0, step = 0.1, width = 400)),
                    
                    # set the UI for the main panel 
                    dashboardBody(
