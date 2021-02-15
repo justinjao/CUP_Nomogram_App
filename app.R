@@ -3,12 +3,17 @@
 # The app takes in input from the users and calculates a total score based on
 # the 5 factors, which is used to calculate 1 and 2 year survival.
 
-# Load Necessary Packages -------------------------------------------------
+# Load Necessary Packages & Data -------------------------------------------------
 
 library(shiny)
 library(shinyWidgets)
 library(flexdashboard)
 library(shinydashboard)
+library(rms)
+library(survival)
+
+# read in model
+model <- readRDS("mymodel.rds")
 
 #defining the CSS settings for the Gauge widget
 css <- HTML("
