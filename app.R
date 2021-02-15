@@ -33,15 +33,15 @@ ui <-dashboardPage(skin = "blue",
                    # set the input widgets for the sidebar
                    dashboardSidebar(width = 450,
                                     radioButtons(inputId = "sex", label = "Sex",
-                                                 choices = c("Female" = "female",
-                                                             "Male" = "male")),
+                                                 choices = c("Female" = "Female",
+                                                             "Male" = "Male")),
                                     sliderTextInput(inputId = "ecog", label = "ECOG Status",
-                                                    choices = c("0", "1", "2", ">2"), selected = "0", grid = TRUE, width = 400),
+                                                    choices = c("0", "1", "2", "> 2"), selected = "0", grid = TRUE, width = 400),
                                     radioButtons(inputId = "histology", label = "Histology",
-                                                 choices = c("Non-Adenocarcinoma" = "nonadeno",
-                                                             "Adenocarcinoma" = "adeno")),
+                                                 choices = c("Non-Adenocarcinoma" = "Non-Adenoca",
+                                                             "Adenocarcinoma" = "Adenoca")),
                                     radioButtons(inputId = "numsites", label = "Number of Metastatic Sites",
-                                                 choices = c("<3","≥3")),
+                                              choiceNames = c("<3", "≥3"),  choiceValues = c("< 3",">= 3")), ##going to have to fix this
                                      numericInput(inputId = "nlr", label = "(NLR) Neutrophil-Lymphocite Ratio  (max is ≥50)", min = 0.0, max = 50.0, value = 1.0, step = 0.1, width = 400)),
                    
                    # set the UI for the main panel 
@@ -63,7 +63,8 @@ ui <-dashboardPage(skin = "blue",
                      # sets UI for the value box and the 2 gauges
                      fluidRow(
                        column(width = 4, offset = 4, 
-                              valueBoxOutput("vbox", width = NULL),
+                              # commented out as no longer necessary for now
+                            #  valueBoxOutput("vbox", width = NULL),
                       gaugeOutput("oneYrSurv", width = "100%", height = "100%"), 
                      gaugeOutput("twoYrSurv", width = "100%", height = "100%") 
                      )),
@@ -93,42 +94,35 @@ ui <-dashboardPage(skin = "blue",
 # Define server logic 
 server <- function(input, output) {
   
-  # sum the inputs from the user
-  # switch is used to change the value of each variable depending on user input
-  totalSum <- reactive({
-    sum(sex <- switch(input$sex,
-                      "female" = 0,
-                      "male" = 25),
-        ECOG <- switch(as.character(input$ecog),
-                       "0"  = 0,
-                       "1"  = 41,
-                       "2"  = 69,
-                       ">2" = 100),
-        histology <- switch(input$histology,
-                            "nonadeno" = 0,
-                            "adeno" = 27),
-        
-        numsites <- switch(input$numsites,
-                           "<3" = 0,
-                           "≥3" = 31),
+  # reads user data and stores it in a dataframe
+  
+  userData <- reactive({
+    df <- NULL
+    df$gender = input$sex
+        df$ecog.cat = as.character(input$ecog)
+        df$hist.cat = input$histology
         # set max value to 50 for the model
-        nlr <- min(input$nlr, 50.0))
+        df$nlr = min(input$nlr, 50.0)
+          
+        df$number.of.sites.bin = input$numsites
+    df <- as.data.frame(df)
   })
   
-  # render the value box based on totalSum
-  output$vbox <- renderValueBox({
-    valueBox(totalSum(), subtitle = "Patient Score", icon = icon("notes-medical"))
-  })
+  # render the value box based on totalSum - no longer necessary but kept for now in
+  # case we may want to bring it back
+  # output$vbox <- renderValueBox({
+   # valueBox(totalSum(), subtitle = "Patient Score", icon = icon("notes-medical"))
+  ## })
   
   # calculates the different survival rates and converts to a percentage
-  oneYrSurv <- reactive(exp(-exp(0.0123 * totalSum() - 1.95)) * 100)
-  twoYrSurv <- reactive(exp(-exp(0.0123 * totalSum() - 1.09)) * 100)
+  oneYrSurv <- reactive(survest(model, newdata=userData(), time=1)$surv * 100)
+  twoYrSurv <- reactive(survest(model, newdata=userData(), time=2)$surv * 100)
   
   # output gauge for one year survival. Rounds values and ensures minimum value is 10
   output$oneYrSurv <- renderGauge({
     gauge(min = 0, max = 100, 
-          value = round(ifelse(oneYrSurv() < 10,
-                               10,
+          value = round(ifelse(oneYrSurv() < 1,
+                               1,
                                oneYrSurv())), 
           symbol = "%", label = "One Year Survival")
   })
@@ -136,8 +130,8 @@ server <- function(input, output) {
   # output gauge for two year survival. Rounds values and ensures minimum value is 10
   output$twoYrSurv <- renderGauge({
     
-    gauge(min = 0, max = 100, value = round(ifelse(twoYrSurv() < 10,
-                                                   10,
+    gauge(min = 0, max = 100, value = round(ifelse(twoYrSurv() < 1,
+                                                   1,
                                                    twoYrSurv())), 
           symbol = "%", label = "Two Year Survival")
   })
