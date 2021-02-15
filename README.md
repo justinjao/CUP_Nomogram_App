@@ -1,5 +1,5 @@
 # Cancers of Unknown Primary Nomogram Application
-A nomogram app for Cancers of Unknown Primary (CUP). The link to the app can be found (here)[https://cupnomogram.shinyapps.io/Nomogram/].
+A nomogram app for Cancers of Unknown Primary (CUP). The link to the app can be found [here](https://cupnomogram.shinyapps.io/Nomogram/).
 
 This is a shiny application demonstrating the usage of a nomogram for Cancers of Unknown Primary, for potential use in oncology clinics.
 
