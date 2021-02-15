@@ -1,0 +1,12 @@
+name: Nomogram
+title: Nomogram
+username:
+account: cupnomogram
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2942173
+bundleId: 3702139
+url: https://cupnomogram.shinyapps.io/Nomogram/
+when: 1601855993.41723
+asMultiple: FALSE
+asStatic: FALSE
