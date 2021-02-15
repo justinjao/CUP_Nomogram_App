@@ -21,7 +21,8 @@ css <- HTML(
   height: 200px;
   width: 300px;
   }",
-".main-sidebar { font-size: 20px; }")
+".main-sidebar { font-size: 20px; }",
+".irs-grid-text { font-size: 20px; }")
 # Defining UI (Front-End) -------------------------------------------------
 
 # Define UI for application. This uses the dashboard layout with a black skin
