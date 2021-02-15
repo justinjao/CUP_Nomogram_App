@@ -15,9 +15,7 @@ The app was designed and deployed using the R Shiny package.
 
 The sidebar details the 5 prognostic factors that can be modified.
 
-The patient score is displayed in case the user may want to consult the original nomogram pictorial in the article.
-
-The 2 gauges displayed in center change reactively to user input, automatically calculating survival rates.
+The 2 gauges displayed in the center change reactively to user input, automatically calculating survival rates.
 
 
 ## Acknowledgments:
