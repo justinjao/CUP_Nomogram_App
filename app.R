@@ -57,7 +57,7 @@ ui <-dashboardPage(skin = "blue",
                      h4("Survival estimates can often be challenging for clinicians to provide when 
  seeing patients with cancers of unknown primary.  Here we provide a simple application 
  to estimate 1 and 2 year overall survival rates for patients with cancers of unknown 
- primary, based on 5 well-known and validated prognostic factors."),
+ primary, based on five well-known and validated prognostic factors."),
                     
                      #line breaks 
                      br(), 
@@ -81,10 +81,10 @@ ui <-dashboardPage(skin = "blue",
                      institutions (the MD Anderson Cancer Center, BC Cancer, and 
                      Sarah Cannon Cancer Center). More information about how the 
                      factors were chosen, and performance of the nomogram can be 
-                     found here:"),
+                     found at:"),
                      
                      br(),
-                    strong("(reference will be inserted when available)"),
+                    strong("Raghav, K., Hwang, H., Jácome, A.A., Bhang, E., Willett, A., Huey, R.W., Dhillon, N.P., Modha, J., Smaglo, B.G., Matamoros, A., Estrella, J.S., Jao, J., Overman, M.J., Wang, X., Greco, F.A., Loree, J.M., Varadhachary, G.R., 2021. Development and validation of a Novel nomogram for individualized prediction of survival in cancer of unknown PRIMARY (CUP). Clinical Cancer Research."),
                     br(),
                      
                      # logos 
