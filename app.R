@@ -86,7 +86,9 @@ ui <-dashboardPage(skin = "blue",
                      br(),
                     strong("Raghav, K., Hwang, H., Jácome, A.A., Bhang, E., Willett, A., Huey, R.W., Dhillon, N.P., Modha, J., Smaglo, B.G., Matamoros, A., Estrella, J.S., Jao, J., Overman, M.J., Wang, X., Greco, F.A., Loree, J.M., Varadhachary, G.R., 2021. Development and validation of a Novel nomogram for individualized prediction of survival in cancer of unknown PRIMARY (CUP). Clinical Cancer Research."),
                     br(),
-                     
+                    br(),
+                     em(style="font-size:9px;", "DISCLAIMER: THIS WEBSITE AND TOOL DOES NOT PROVIDE MEDICAL ADVICE NOR IS IT INTENDED TO BE A SUBSTITUTE FOR PROFESSIONAL MEDICAL ADVICE. The information contained on this site, including all text, graphics, and images, are for informational purposes only. Always seek the advice of your physician or other qualified health care professional with any questions you may have regarding a medical condition, diagnosis, or treatment, and never disregard or delay seeking professional medical advice based on any information contained on this site."),
+                    br(),
                      # logos 
                      img(src = "mdanderson.svg", height = 240, width = 240),
                      img(src = "bccancer.png", height = 120, width = 120),
